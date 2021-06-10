@@ -1,0 +1,6 @@
+user = xxx
+password = xxx
+url = ***REMOVED***.snowflakecomputing.com
+warehouse = DEFAULT_XS
+db = temp_snowpark
+schema = mlops
