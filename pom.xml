@@ -32,11 +32,11 @@
 
   <dependencies>
     <dependency>
-      <groupId>net.snowflake</groupId>
-      <artifactId>snowpark</artifactId>
+      <groupId>io.phdata</groupId>
+      <artifactId>snowpark_shaded</artifactId>
       <version>0.5.0</version>
   </dependency>
-
+<!-- 
   <dependency>
     <groupId>org.scala-lang</groupId>
     <artifactId>scala-library</artifactId>
@@ -81,7 +81,7 @@
   <artifactId>log4j</artifactId>
   <version>1.2.17</version>
 </dependency>
-
+ -->
 
   <dependency>
     <groupId>junit</groupId>
@@ -146,28 +146,6 @@
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
         </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-          <executions>
-              <execution>
-                  <id>installSnowPark</id>
-                  <phase>initialize</phase>
-                  <goals>
-                      <goal>install-file</goal>
-                  </goals>
-                  <configuration>
-                      <groupId>net.snowflake</groupId>
-                      <artifactId>snowpark</artifactId>
-                      <version>0.5.0</version>
-                      <packaging>jar</packaging>
-                      <generatePom>true</generatePom>
-                      <file>${snowpark.lib.path}</file>
-                  </configuration>
-              </execution>
-          </executions>
-      </plugin>       
        <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
@@ -223,20 +201,27 @@
                   <goal>shade</goal>
               </goals>
               <configuration>
+                <filters>
+                  <filter>
+                    <artifact>*:*</artifact>
+                    <excludes>
+                      <exclude>META-INF/*.SF</exclude>
+                      <exclude>META-INF/*.DSA</exclude>
+                      <exclude>META-INF/*.RSA</exclude>
+                    </excludes>
+                  </filter>
+                </filters>
+      
                   <artifactSet>
                      
                       <includes>
-                          <include>log4j:log4j</include>
-                          <include>org.apache.spark:spark-core_${scala.compat.version}</include>
-                          <include>org.apache.spark:spark-sql_${scala.compat.version}</include>
-                          <include>org.apache.spark:spark-catalyst_${scala.compat.version}</include>
-                          <include>net.snowflake:snowpark</include>
+                          <include>io.phdata:snowpark_shaded</include>
                       </includes>
                     </artifactSet>
                   <createDependencyReducedPom>false</createDependencyReducedPom>
 
                   <finalName>${project.artifactId}-${project.version}</finalName>
-
+<!-- 
                   <transformers>
 
                     <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -249,7 +234,7 @@
                     <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
                     </transformer>
                     
-                </transformers>
+                </transformers> -->
               </configuration>
           </execution>
       </executions>
