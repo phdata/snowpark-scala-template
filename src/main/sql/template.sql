@@ -20,11 +20,11 @@ select *, udfPerm(*) from values (10);
 
 
 -- Broken code
-CREATE  PROCEDURE "TEMP_SNOWPARK"."MLOPS".procPerm() 
-    RETURNS INT 
-    LANGUAGE JAVA 
-    IMPORTS = ('@STG/snowpark-template-1.0-SNAPSHOT.jar') 
-    HANDLER='SnowparkApp.storedProcHandler';
+-- CREATE  PROCEDURE "TEMP_SNOWPARK"."MLOPS".procPerm() 
+--     RETURNS INT 
+--     LANGUAGE JAVA 
+--     IMPORTS = ('@STG/snowpark-template-1.0-SNAPSHOT.jar') 
+--     HANDLER='SnowparkApp.storedProcHandler';
 
 
 -- Broken code

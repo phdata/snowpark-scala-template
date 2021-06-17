@@ -212,16 +212,16 @@
                   </filter>
                 </filters>
       
-                  <artifactSet>
+                  <!-- <artifactSet>
                      
                       <includes>
                           <include>io.phdata:snowpark_shaded</include>
                       </includes>
-                    </artifactSet>
+                    </artifactSet> -->
                   <createDependencyReducedPom>false</createDependencyReducedPom>
 
                   <finalName>${project.artifactId}-${project.version}</finalName>
-<!-- 
+
                   <transformers>
 
                     <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -234,7 +234,7 @@
                     <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
                     </transformer>
                     
-                </transformers> -->
+                </transformers>
               </configuration>
           </execution>
       </executions>

@@ -1,5 +1,6 @@
 user = xxx
 password = xxx
+role = xxx
 url = ***REMOVED***.snowflakecomputing.com
 warehouse = DEFAULT_XS
 db = temp_snowpark
