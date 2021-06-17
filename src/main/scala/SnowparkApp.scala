@@ -11,27 +11,19 @@ import java.util.Map
 
 import scala.collection.JavaConverters._
 
-
-class StoredProcClass {
-    def handler(session: Session, str: String): String = {
-        import session.implicits._
-
-        return "success!"
-    }
-}
-
 object SnowparkApp {
     def main(args: Array[String]): Unit = {
 
-    val stream: InputStream = getClass.getResourceAsStream("/snowflake.conf")
-    val properties: Properties = new Properties()
-    properties.load(stream)
+        // FIXME - This could probably be more elegant
+        val stream: InputStream = getClass.getResourceAsStream("/snowflake.conf")
+        val properties: Properties = new Properties()
+        properties.load(stream)
 
-    val session = Session.builder.configs(properties.asScala.asJava).create
-    
-    // Uncomment below to test out UDFs
-    // createPermanentUdf(session)
-    // createInlinePermanentUdf(session)
+        val session = Session.builder.configs(properties.asScala.asJava).create
+        
+        // Uncomment below to test out UDFs
+        // createPermanentUdf(session)
+        // createInlinePermanentUdf(session)
     }
 
 
