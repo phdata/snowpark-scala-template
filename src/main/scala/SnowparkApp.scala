@@ -1,14 +1,10 @@
 
-import com.snowflake.snowpark._
-import com.snowflake.snowpark.functions._
-import com.snowflake.snowpark.types._
 
-import scala.io.Source
-import java.io.InputStream
+import com.snowflake.snowpark.Session
+
+import java.io.{File, InputStream}
+import java.nio.file.Paths
 import java.util.Properties
-import java.util.Map
-
-
 import scala.collection.JavaConverters._
 
 object SnowparkApp {
@@ -20,14 +16,34 @@ object SnowparkApp {
         properties.load(stream)
 
         val session = Session.builder.configs(properties.asScala.asJava).create
-        
+        addDeps(session)
+
         // Uncomment below to test out UDFs
-        // createPermanentUdf(session)
-        // createInlinePermanentUdf(session)
+         createPermanentUdf(session)
+         createInlinePermanentUdf(session)
     }
 
+    private def addDeps(session: Session): Unit = {
+        val PATH = Paths.get(".", "target", "dependency").toAbsolutePath.toString
 
-    def createPermanentUdf(session: Session) = {
+        val lst = getListOfFiles(PATH)
+        val filteredLst = lst.filterNot(_.matches("^.*snowpark(_original)?-[0-9.]+\\.jar$"))
+        for(f <- filteredLst) {
+            System.out.println("Adding dep:" + f)
+            session.addDependency(f)
+        }
+    }
+
+    def getListOfFiles(dir: String): List[String] = {
+        val d = new File(dir)
+        if (d.exists && d.isDirectory) {
+             d.listFiles.filter(_.isFile).toList.map(_.getPath)
+        } else {
+             List[String]()
+        }
+    }
+
+    def createPermanentUdf(session: Session): Unit = {
         session.sql("drop FUNCTION if EXISTS udfPerm(Int)").show()
 
         session.udf.registerPermanent("udfPerm", permanentUdfHandler _,  "STG")
@@ -35,11 +51,11 @@ object SnowparkApp {
         session.sql("select *, udfPerm(*) from values (10)").show()
     }
 
-    def permanentUdfHandler(i: Int) = {
+    def permanentUdfHandler(i: Int): Int = {
         i * i
     }
 
-    def createInlinePermanentUdf(session: Session) = {
+    def createInlinePermanentUdf(session: Session): Unit = {
         session.sql("drop FUNCTION if EXISTS udfInlinePerm(Int)").show()
 
         session.udf.registerPermanent("udfInlinePerm", (i: Int) => {
@@ -47,14 +63,6 @@ object SnowparkApp {
         },  "STG")
 
         session.sql("select *, udfInlinePerm(*) from values (10)").show()
-    }
-
-    def storedProcHandler(session: Session): Int  = {
-        10
-    }
-
-    def dataframeSession(session: Session) = {
-        // TODO
     }
 
 }
