@@ -11,7 +11,7 @@ object SnowparkApp {
     def main(args: Array[String]): Unit = {
 
         // FIXME - This could probably be more elegant
-        val stream: InputStream = getClass.getResourceAsStream("/snowflake.conf")
+        val stream: InputStream = getClass.getResourceAsStream("snowflake.conf")
         val properties: Properties = new Properties()
         properties.load(stream)
 
