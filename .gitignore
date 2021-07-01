@@ -1,6 +1,8 @@
 .bloop/
 .metals/
 
+*.iml
+
 # Node artifact files
 node_modules/
 dist/
@@ -20,7 +22,6 @@ dist/
 
 # Maven
 target/
-dist/
 
 # JetBrains IDE
 .idea/
