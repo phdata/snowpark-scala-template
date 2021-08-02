@@ -8,8 +8,8 @@ import java.util.Properties
 import scala.collection.JavaConverters._
 
 object SnowparkApp {
-    def main(args: Array[String]): Unit = {
 
+    def main(args: Array[String]): Unit = {
         // FIXME - This could probably be more elegant
         val stream: InputStream = getClass.getResourceAsStream("snowflake.conf")
         val properties: Properties = new Properties()
@@ -19,8 +19,8 @@ object SnowparkApp {
         addDeps(session)
 
         // Uncomment below to test out UDFs
-         createPermanentUdf(session)
-         createInlinePermanentUdf(session)
+//         createPermanentUdf(session)
+//         createInlinePermanentUdf(session)
     }
 
     private def addDeps(session: Session): Unit = {
