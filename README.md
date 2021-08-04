@@ -7,7 +7,6 @@
 3. Modify this project to do what you need.
 
 Main files:
-- `src/resources/snowflake.conf.template`: Credentials template
-- `src/main/scala/SnowparkApp.scala`: Main file demonstrating interactive Snowpark sessions
-- `src/main/sql/template.sql`: Demonstration of init code and creating an UDF directly from SQL using a JAR file handler
-- `src/main/java/`: *DO NOT USE* - An attempt to get Snowpark in Java and not Scala - this didn't work.
+* `src/resources/snowflake.conf.template`: Credentials template
+* `src/main/scala/SnowparkApp.scala`: Main file demonstrating interactive Snowpark sessions
+* `src/main/sql/template.sql`: Demonstration of init code and creating an UDF directly from SQL using a JAR file handler
