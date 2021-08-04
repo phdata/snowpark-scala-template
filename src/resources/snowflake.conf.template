@@ -1,7 +1,7 @@
 user = xxx
 password = xxx
 role = xxx
-url = ***REMOVED***.snowflakecomputing.com
+url = xxx.snowflakecomputing.com
 warehouse = DEFAULT_XS
 db = temp_snowpark
 schema = mlops
