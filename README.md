@@ -4,9 +4,20 @@ This project provides a quickstart template for a typical Snowpark project.  It 
 
 ## To use this template --
 
+### Run as a Scala program
 1. Copy `src/resources/snowflake.conf.template` to `src/resources/snowflake.conf` and fill in credentials
 2. Run `mvn scala:run` to test things out
 3. Modify this project to do what you need.
+
+
+### Run as an executable JAR
+_Note- the `./dependencies` directory must still be present for upload to Snowflake_
+1. Copy `src/resources/snowflake.conf.template` to `src/resources/snowflake.conf` and fill in credentials
+2. Run `mvn package` to generate the JAR file
+3. Run `java -jar target\snowpark-template-1.0-SNAPSHOT.jar` to execute
+4. Modify this project to do what you need.
+
+## Files
 
 Main files:
 * `src/resources/snowflake.conf.template`: Credentials template
